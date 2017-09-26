@@ -24,7 +24,25 @@ public class KattisHW2 {
         System.out.print("N: ");
         int n = Scan.nextInt();
         
+        for (int i = 1; i <= n; i++)
+        {
+            if (checkDiv(i, x) && !checkDiv(i, y))
+                System.out.println("Fizz");
+            else if (checkDiv(i, y) && !checkDiv(i, x))
+                System.out.println("Buzz");
+            else if (checkDiv(i, x) && checkDiv(i, y))
+                System.out.println("FizzBuzz");
+            else
+                System.out.println(i);
+        }
         
     }
-    
+    static boolean checkDiv (int visor, int dend)
+    {
+        if ((visor % dend) == 0){
+            return true;
+        }
+        else
+            return false;
+    }
 }
