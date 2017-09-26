@@ -40,13 +40,6 @@ public class KattisHW2Test {
     /**
      * Test of main method, of class KattisHW2.
      */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        KattisHW2.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-    }
 
     /**
      * Test of checkDiv method, of class KattisHW2.

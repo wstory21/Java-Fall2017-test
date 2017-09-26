@@ -15,7 +15,7 @@ public class KattisHW2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner Scan = new Scanner (System.in);
         System.out.print("X: ");
         int x = Scan.nextInt();
