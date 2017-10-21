@@ -10,12 +10,12 @@ import java.util.Scanner;
  *
  * @author Warren
  */
-public class Collections {
+public class Collections{
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         // TODO code application logic here
         ArrayList<Integer> list = new ArrayList<Integer>(10);
@@ -38,6 +38,8 @@ public class Collections {
         System.out.print("Find element at Index: ");
         guess = scan.nextInt();
         System.out.println("Index " + guess + " is " + list.get(guess-1));
+        
+        System.out.print("Size of Array: " + list.size());
+        list.remove(5);
     }
-    
 }

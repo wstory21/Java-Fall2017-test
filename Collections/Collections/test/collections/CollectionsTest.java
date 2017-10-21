@@ -89,4 +89,15 @@ public class CollectionsTest {
         int result = list.get(0);
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testSize() {
+        ArrayList<Integer> list = new ArrayList<Integer>(10);
+        System.out.println("size");
+        list.add(1);
+        list.add(2);
+        int expResult = 2;
+        int result = list.size();
+        assertEquals(expResult, result);
+    }
 }
