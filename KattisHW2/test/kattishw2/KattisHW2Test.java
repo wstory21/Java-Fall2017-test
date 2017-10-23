@@ -45,11 +45,21 @@ public class KattisHW2Test {
      * Test of checkDiv method, of class KattisHW2.
      */
     @Test
-    public void testCheckDiv() {
+    public void testCheckDivTrue() {
         System.out.println("checkDiv");
         int visor = 2;
         int dend = 2;
         boolean expResult = true;
+        boolean result = KattisHW2.checkDiv(visor, dend);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testCheckDivFalse() {
+        System.out.println("checkDiv");
+        int visor = 3;
+        int dend = 2;
+        boolean expResult = false;
         boolean result = KattisHW2.checkDiv(visor, dend);
         assertEquals(expResult, result);
     }
