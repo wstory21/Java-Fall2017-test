@@ -6,6 +6,7 @@
 package collections;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -48,7 +49,7 @@ public class CollectionsTest {
 //        Collections.main(args);
     }
     @Test
-    public void testContains() {
+    public void testFind() {
         ArrayList<Integer> list = new ArrayList<Integer>(10);
         System.out.println("Contains");
         int guess = 10;
@@ -100,4 +101,8 @@ public class CollectionsTest {
         int result = list.size();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of find method, of class Collections.
+     */
 }
