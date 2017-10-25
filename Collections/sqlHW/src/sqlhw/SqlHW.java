@@ -99,22 +99,47 @@ public class SqlHW {
         
         while (result.next())
         {
-            System.out.println("ID: " + result.getInt(1) + "     Item Name: " + result.getString(2) + "     Item Category: " + result.getString(3) + "     Item Price: " + result.getInt(4));
+            System.out.println("ID: " + result.getInt(1) + "     Item Name: " + result.getString(2) + "     Item Category: " + result.getString(3) + "     Item Price: $" + result.getInt(4));
         }
         } catch (SQLException ex) {
             System.out.println("Read didn't work");
         }
     }
     
+    void sold(int id)
+    {
+        try
+        {
+            preparedStatement = connection.prepareStatement("DELETE FROM INVENTORY WHERE id =?");
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+            System.out.println("Sold!");
+        }
+        catch (SQLException ex)
+        {
+            System.out.println("Item didn't sell");
+            System.out.println("Sold didn't work");
+        }
+    }
+    
     void run() {
         reset();
-        
-        insert(1, "apple", "fruit", 1);
-        insert(2, "sushi", "seafood", 6);
-        insert(3, "mac-n-cheese", "pasta", 2);
-        insert(4, "begals", "bread", 3);
+        System.out.println("");
+        insert(1111, "apple", "fruit", 1);
+        insert(2111, "sushi", "seafood", 6);
+        insert(3111, "mac-n-cheese", "pasta", 2);
+        insert(4111, "begals", "bread", 3);
+        System.out.println("");
+        System.out.println("Inventory");
         read();
+        System.out.println("");
         
+        int sold = 1111;
+        System.out.println("Selling Item: " + sold);
+        sold(sold);
+        System.out.println("");
+        System.out.println("Updated Inventory");
+        read();
         
         try {
             connection.close();
