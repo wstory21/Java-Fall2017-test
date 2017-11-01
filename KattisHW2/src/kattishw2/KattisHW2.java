@@ -17,11 +17,8 @@ public class KattisHW2 {
      */
     public static void main(String[] args){
         Scanner Scan = new Scanner (System.in);
-        System.out.print("X: ");
         int x = Scan.nextInt();
-        System.out.print("Y: ");
         int y = Scan.nextInt();
-        System.out.print("N: ");
         int n = Scan.nextInt();
         
         for (int i = 1; i <= n; i++)
