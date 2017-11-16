@@ -15,82 +15,30 @@ public class SqlParallelSteams {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //int []list = {2,5,3,6,1,4,8};
-        ArrayList list = new ArrayList();
-        list.add(2);
-        list.add(9);
-        list.add(3);
-        list.add(6);
-        list.add(2);
-        list.add(3);
+        Integer []array = {2,5,3,6,1,4,8};
+        List<Integer> list = new ArrayList<>(Arrays.asList(array));
+        System.out.println("Stream Output:");
+        list
+                .stream()
+                .forEach(e -> System.out.print(e + " "));
+        System.out.println("");
         
-        list.parallelStream()
-                .sorted()
-                .skip(2);
+        System.out.println("Parallel Stream Output:");
+        list
+                .parallelStream()
+                .forEach(e -> System.out.print(e + " "));
+        System.out.println("");
         
+        System.out.println("Parallel Stream Re-run Output:");
+        list
+                .parallelStream()
+                .forEach(e -> System.out.print(e + " "));
+        System.out.println("");
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        System.out.println("forEacOrdered Parallel Stream Output:");
+        list
+                .parallelStream()
+                .forEachOrdered(e -> System.out.print(e + " "));
+        System.out.println("");      
     }
-    /*
-    void assentSort(int []list)
-    {
-        int tmp;
-        for (int i = 0; i < list.length; i++)
-        {
-            for (int j = i+1; j < list.length; j++)
-            {
-                if (list[i] < list[j])
-                {
-                    tmp = list[i];
-                    list[i] = list[j];
-                    list[j] = tmp;
-                }
-            }
-        }
-    }
-    void add(int []list)
-    {
-        int sum = 0;
-        for (int i = 0; i < list.length; i++)
-        {
-            sum += list[i];
-        }
-        System.out.println("Sum of list: " + sum);
-    }
-    void sub(int []list)
-    {
-        int sub = 0;
-        for (int i = 0; i < list.length; i++)
-        {
-            sub -= list[i];
-        }
-        System.out.println("Difference of list: " + sub);
-    }
-    void mult(int []list)
-    {
-        int mult = 0;
-        for (int i = 0; i < list.length; i++)
-        {
-            mult *= list[i];
-        }
-        System.out.println("Mult of list: " + mult);
-    }
-    void div(int []list)
-    {
-        int div = 0;
-        for (int i = 0; i < list.length; i++)
-        {
-            div /= list[i];
-        }
-        System.out.println("Division of list: " + div);
-    }
-*/
 }
