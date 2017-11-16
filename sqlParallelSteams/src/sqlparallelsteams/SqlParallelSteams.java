@@ -17,28 +17,40 @@ public class SqlParallelSteams {
     public static void main(String[] args) {
         Integer []array = {2,5,3,6,1,4,8};
         List<Integer> list = new ArrayList<>(Arrays.asList(array));
+        
         System.out.println("Stream Output:");
+        sOutput(list);       
+        
+        System.out.println("Parallel Stream Output:");
+        pOutput(list);
+        
+        System.out.println("Parallel Stream Re-run Output:");
+        pOutput(list);
+        
+        System.out.println("forEacOrdered Parallel Stream Output:");
+        pForOutput(list);      
+    }
+    
+    static void sOutput(List<Integer> list)
+    {
         list
                 .stream()
                 .forEach(e -> System.out.print(e + " "));
         System.out.println("");
-        
-        System.out.println("Parallel Stream Output:");
+    }
+    
+    static void pOutput(List<Integer> list)
+    {
         list
                 .parallelStream()
                 .forEach(e -> System.out.print(e + " "));
         System.out.println("");
-        
-        System.out.println("Parallel Stream Re-run Output:");
-        list
-                .parallelStream()
-                .forEach(e -> System.out.print(e + " "));
-        System.out.println("");
-        
-        System.out.println("forEacOrdered Parallel Stream Output:");
+    }
+    
+    static void pForOutput(List<Integer> list)
+    {
         list
                 .parallelStream()
                 .forEachOrdered(e -> System.out.print(e + " "));
-        System.out.println("");      
     }
 }

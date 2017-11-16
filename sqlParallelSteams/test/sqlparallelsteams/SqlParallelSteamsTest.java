@@ -5,6 +5,9 @@
  */
 package sqlparallelsteams;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,6 +48,39 @@ public class SqlParallelSteamsTest {
         System.out.println("main");
         String[] args = null;
         SqlParallelSteams.main(args);
+    }
+
+    /**
+     * Test of sOutput method, of class SqlParallelSteams.
+     */
+    @Test
+    public void testSOutput() {
+        System.out.println("sOutput");
+        Integer []array = {2,5,3,6,1,4,8};
+        List<Integer> list = new ArrayList<>(Arrays.asList(array));
+        SqlParallelSteams.sOutput(list);
+    }
+
+    /**
+     * Test of pOutput method, of class SqlParallelSteams.
+     */
+    @Test
+    public void testPOutput() {
+        System.out.println("pOutput");
+        Integer []array = {2,5,3,6,1,4,8};
+        List<Integer> list = new ArrayList<>(Arrays.asList(array));
+        SqlParallelSteams.pOutput(list);
+    }
+
+    /**
+     * Test of pForOutput method, of class SqlParallelSteams.
+     */
+    @Test
+    public void testPForOutput() {
+        System.out.println("pForOutput");
+        Integer []array = {2,5,3,6,1,4,8};
+        List<Integer> list = new ArrayList<>(Arrays.asList(array));
+        SqlParallelSteams.pForOutput(list);
     }
     
 }
