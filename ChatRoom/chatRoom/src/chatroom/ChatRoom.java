@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +23,6 @@ public class ChatRoom {
     private Socket[] USERS = new Socket[100];
     public boolean sev = true;
     public int n_of_users = 0;
-    public Stack<String> messages = new Stack<String>();
     
     Thread t1 = new Thread () {
         public void run(){
@@ -70,7 +68,6 @@ public class ChatRoom {
                     else
                     {
                         System.out.println(txt);
-                        messages.push(txt);
                         for (int j = 0; j < n_of_users; j++)
                         {
                             out = new PrintWriter(USERS[j].getOutputStream(), true);
@@ -90,23 +87,7 @@ public class ChatRoom {
         {
             USERS[n_of_users] = listener.accept();
             n_of_users++;
-            sendMess(USERS[n_of_users-1]);
             System.out.println("User Added");
-        }
-    }
-    
-    public void sendMess(Socket s) throws IOException
-    {
-        Stack<String> temp = null; 
-        PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-        for (int i = 0; i < messages.size();i++)
-        {
-             temp.push(messages.firstElement());
-             System.out.println(messages.pop());
-        }
-        for (int i = 0; i < temp.size(); i++)
-        {
-            messages.push(temp.pop());
         }
     }
     
