@@ -5,17 +5,126 @@
  */
 package chatroom;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Warren
  */
 public class ChatRoom {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    private Socket[] USERS = new Socket[100];
+    public boolean sev = true;
+    public int n_of_users = 0;
+    public Stack<String> messages = new Stack<String>();
+    
+    Thread t1 = new Thread () {
+        public void run(){
+            try {
+                addUsers();
+            } catch (IOException ex) {
+                Logger.getLogger(ChatRoom.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    };
+    
+    Thread t2 = new Thread(){
+        public void run() {
+            try {
+                handleUsers();
+            } catch (IOException ex) {
+                Logger.getLogger(ChatRoom.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    };
+    
+    public void handleUsers() throws IOException
+    {
+        BufferedReader input;
+        PrintWriter out;
+        String txt;
+        while(true)
+        {
+            for (int i = 0; i < n_of_users; i++)
+            {
+                input = new BufferedReader(new InputStreamReader(USERS[i].getInputStream()));
+                if (input.ready())
+                {
+                    txt = input.readLine();
+                    if (txt == null)
+                    {
+                        USERS[i].close();
+                        for (int k = i; k < n_of_users-1; k++)
+                        {
+                            USERS[k] = USERS[k+1];
+                        }
+                    }
+                    else
+                    {
+                        System.out.println(txt);
+                        messages.push(txt);
+                        for (int j = 0; j < n_of_users; j++)
+                        {
+                            out = new PrintWriter(USERS[j].getOutputStream(), true);
+                            out.println(txt);
+                        }
+                    }
+                }
+            }
+            System.out.print("");
+        }
+    }
+    public void addUsers() throws IOException
+    {
+        System.out.println("Current IP address : " + InetAddress.getLocalHost());
+        ServerSocket listener = new ServerSocket(9090);
+        while (sev)
+        {
+            USERS[n_of_users] = listener.accept();
+            n_of_users++;
+            sendMess(USERS[n_of_users-1]);
+            System.out.println("User Added");
+        }
+    }
+    
+    public void sendMess(Socket s) throws IOException
+    {
+        Stack<String> temp = null; 
+        PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+        for (int i = 0; i < messages.size();i++)
+        {
+             temp.push(messages.firstElement());
+             System.out.println(messages.pop());
+        }
+        for (int i = 0; i < temp.size(); i++)
+        {
+            messages.push(temp.pop());
+        }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        try
+        {
+            ChatRoom g1 = new ChatRoom();
+            g1.start();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
+    }
+    public void start() throws Exception
+    {
+        t1.start();
+        t2.start();
     }
     
 }
